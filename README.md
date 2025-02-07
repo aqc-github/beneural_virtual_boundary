@@ -100,10 +100,4 @@ Contributions are welcome! Feel free to:
 ## Acknowledgments
 
 - MediaPipe team for the hand tracking solution
-- OpenCV community for computer vision tools
-
-## Notes
-
-- The application uses the YOLOv8 nano model by default
-- Detection is optimized for real-time performance
-- The model will download automatically on first run 
+- OpenCV community for computer vision tools 
