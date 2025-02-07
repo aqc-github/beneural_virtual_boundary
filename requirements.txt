@@ -1,3 +1,55 @@
-opencv-python-headless>=4.8.0
+# Hand Tracking Application
+# =======================
+#
+# A computer vision application for detecting and tracking hands
+# using your Mac's built-in camera.
+#
+opencv-python>=4.8.0
 mediapipe>=0.10.0
-numpy>=1.24.0 
+numpy>=1.24.0
+#
+# Installation & Running Instructions:
+# ---------------------------------
+#
+# 1. Docker Setup:
+#    - Ensure Docker and Docker Compose are installed on your system
+#    - Clone this repository
+#
+# 2. Running the Application:
+#    
+#    For Linux Users:
+#    ```bash
+#    # Allow X server connections
+#    xhost +local:docker
+#    
+#    # Start the application
+#    docker compose up
+#    
+#    # When done
+#    xhost -local:docker
+#    ```
+#
+#    For macOS Users:
+#    - Install XQuartz
+#    - Enable "Allow connections from network clients" in XQuartz preferences
+#    - Restart XQuartz
+#    - Run: xhost +localhost
+#    - Then: docker compose up
+#
+# 3. Usage:
+#    - The application will open showing your webcam feed
+#    - Hand tracking will be visualized with green landmarks
+#    - Press 'q' to quit the application
+#
+# 4. Development:
+#    To rebuild after code changes:
+#    ```bash
+#    docker compose up --build
+#    ```
+#
+# Troubleshooting:
+# --------------
+# - Ensure webcam is connected and accessible
+# - Check if /dev/video0 exists on your system
+# - Verify X11 permissions are correctly set
+# - For permission issues: sudo chmod 666 /dev/video0 

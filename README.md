@@ -1,49 +1,106 @@
-# Hand Tracking with YOLOv8
+# Hand Tracking Virtual Boundary Detection
 
-This project implements real-time hand tracking using YOLOv8 and OpenCV in a Docker container.
+This project implements real-time hand tracking and virtual boundary detection using MediaPipe and OpenCV, optimized for macOS systems.
+
+## Overview
+
+The application uses your Mac's webcam to track hand movements and detect when they cross into a designated "danger zone". A visual warning system with striped patterns indicates when hands enter restricted areas.
+
+## Features
+
+- Real-time hand tracking with 21 points per hand
+- Visual danger zone with dynamic striped pattern
+- Automatic boundary violation detection
+- Support for both built-in FaceTime camera and external webcams
+- Visual feedback when hands cross the boundary
 
 ## Prerequisites
 
-- Docker installed on your system
-- A webcam connected to your computer
+- macOS system
+- Python 3.9 or higher
+- Built-in FaceTime camera or external webcam
+- Internet connection (for initial package downloads)
 
-## Building the Docker Image
+## Installation
 
-To build the Docker image, run the following command in the project directory:
-
+1. Clone the repository:
 ```bash
-docker build -t hand-tracker .
+git clone [repository-url]
+cd [repository-name]
 ```
 
-## Running the Application
-
-To run the hand tracking application with access to your webcam, use:
-
+2. Make the setup script executable:
 ```bash
-docker run --rm -it \
-    --device=/dev/video0:/dev/video0 \
-    -e DISPLAY=$DISPLAY \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    hand-tracker
+chmod +x setup_and_run.sh
 ```
 
-Note: On macOS, you'll need to install XQuartz and configure it to allow connections from network clients.
+3. Run the setup script:
+```bash
+./setup_and_run.sh
+```
+
+The script automatically:
+- Creates a Python virtual environment
+- Installs required dependencies
+- Launches the application
 
 ## Usage
 
-- The application will open a window showing the webcam feed with hand detection
-- Green boxes will be drawn around detected hands
-- Press 'q' to quit the application
+When you run the application:
+1. A window opens showing your webcam feed
+2. The right portion of the screen shows a striped "danger zone"
+3. Hand movements are tracked with:
+   - Green dots for joint positions
+   - Red lines connecting the joints
+4. The striped pattern becomes more visible when any hand joint enters the danger zone
+5. Press 'q' to quit the application
+
+## Technical Details
+
+The application uses:
+- MediaPipe for precise hand landmark detection
+- OpenCV for video capture and visualization
+- Custom boundary detection algorithm
+- Dynamic visual feedback system
+
+## Project Structure
+
+.
+├── hand_tracker.py      # Main application code
+├── requirements.txt     # Python dependencies
+├── setup_and_run.sh    # Setup and launch script
+└── .gitignore          # Git ignore rules
+```
 
 ## Troubleshooting
 
-If you encounter permission issues with the webcam or display, make sure to:
+If you encounter issues:
 
-1. Grant necessary permissions to the webcam device
-2. Allow Docker to access the X server (on Linux):
-   ```bash
-   xhost +local:docker
-   ```
+1. Camera not opening:
+   - Check if other applications can access your webcam
+   - Close other applications that might be using the camera
+   - The app will try alternative camera indices automatically
+
+2. Performance issues:
+   - Ensure good lighting conditions
+   - Keep hands within camera view
+   - Close resource-intensive applications
+
+## Contributing
+
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest features
+- Submit pull requests
+
+## License
+
+[Your chosen license]
+
+## Acknowledgments
+
+- MediaPipe team for the hand tracking solution
+- OpenCV community for computer vision tools
 
 ## Notes
 
